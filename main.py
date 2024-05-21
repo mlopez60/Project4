@@ -1,7 +1,7 @@
 import os
 from app import app
 import urllib.request
-from flask import Flask, flash, request, redirect, url_for, render_template
+from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory
 from werkzeug.utils import secure_filename
 import matplotlib.pyplot as plt 
 import numpy as np 
@@ -22,6 +22,8 @@ from tensorflow.keras.models import Sequential
 
 from test import predict_image
 from test import new_model
+from test import treatment
+
 
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -47,11 +49,16 @@ def upload_image():
 		save_location = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 		file.save(save_location)
 		flash('Image successfully uploaded and displayed below')
-		output_img = predict_image(save_location, new_model)
-		return render_template('upload.html', filename=output_img)
+		output_img = predict_image(save_location, new_model, filename)
+		processed_location = os.path.join(app.config['PROCESSED_FOLDER'],filename)
+		return render_template('upload.html', filename=filename, treatment = treatment)
 	else:
 		flash('Allowed image types are -> png, jpg, jpeg, gif')
 		return redirect(request.url)
+
+@app.route('/processed/<filename>')
+def display_image(filename):
+    return send_from_directory(app.config['PROCESSED_FOLDER'], filename)
 
 # @app.route('/display/<filename>')
 # def display_image(filename):
