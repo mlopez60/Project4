@@ -22,7 +22,7 @@ from tensorflow.keras.models import Sequential
 
 from test import predict_image
 from test import new_model
-from test import treatment
+
 
 
 
@@ -49,9 +49,9 @@ def upload_image():
 		save_location = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 		file.save(save_location)
 		flash('Image successfully uploaded and displayed below')
-		output_img = predict_image(save_location, new_model, filename)
-		processed_location = os.path.join(app.config['PROCESSED_FOLDER'],filename)
-		return render_template('upload.html', filename=filename, treatment = treatment)
+		processed_filename, treatment = predict_image(save_location, new_model, filename)
+		# processed_location = os.path.join(app.config['PROCESSED_FOLDER'],filename)
+		return render_template('upload.html', filename=processed_filename, treatment = treatment)
 	else:
 		flash('Allowed image types are -> png, jpg, jpeg, gif')
 		return redirect(request.url)

@@ -16,6 +16,8 @@
 	<div>
 		<img src="{{ url_for('display_image', filename=filename) }}">
 	</div>
+	<h3>Treatment Recommendation:</h3>
+    <p>{{ treatment }}</p>
 {% endif %}
 <form method="post" action="/" enctype="multipart/form-data">
     <dl>
