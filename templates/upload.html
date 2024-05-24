@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Flask File Upload Example</title>
     <link rel="stylesheet" href="../static/style.css">
+    <style>
+        .image-preview-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        #preview {
+            max-width: 100%;
+            height: auto;
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <h2>Select a file to upload</h2>
@@ -31,8 +44,8 @@
             <label for="file" class="button">Choose File</label>
             <input type="file" name="file" id="file" autocomplete="off" required>
         </div>
-        <div>
-            <img id="preview" src="#" alt="Image Preview" style="display:none; max-width:100%; height:auto; margin-top:20px;">
+        <div class="image-preview-wrapper">
+            <img id="preview" src="#" alt="Image Preview">
         </div>
         <p>
             <input type="submit" class="button" value="Submit">
