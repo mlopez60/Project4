@@ -31,9 +31,24 @@
             <label for="file" class="button">Choose File</label>
             <input type="file" name="file" id="file" autocomplete="off" required>
         </div>
+        <div>
+            <img id="preview" src="#" alt="Image Preview" style="display:none; max-width:100%; height:auto; margin-top:20px;">
+        </div>
         <p>
             <input type="submit" class="button" value="Submit">
         </p>
     </form>
+
+    <script>
+        document.getElementById('file').onchange = function (event) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var preview = document.getElementById('preview');
+                preview.src = reader.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        };
+    </script>
 </body>
 </html>
