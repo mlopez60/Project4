@@ -1,32 +1,39 @@
 <!doctype html>
-<title>Python Flask File Upload Example</title>
-<h2>Select a file to upload</h2>
-<link rel="stylesheet" href="../static/style.css">
-<p>
-	{% with messages = get_flashed_messages() %}
-	  {% if messages %}
-		<ul>
-		{% for message in messages %}
-		  <li>{{ message }}</li>
-		{% endfor %}
-		</ul>
-	  {% endif %}
-	{% endwith %}
-</p>
-{% if filename %}
-	<div>
-		<img src="{{ url_for('display_image', filename=filename) }}">
-	</div>
-	<h3>Treatment Recommendation:</h3>
-    <p>{{ treatment }}</p>
-{% endif %}
-<form method="post" action="/" enctype="multipart/form-data">
-    <dl>
-		<p>
-			<input type="file" name="file" autocomplete="off" required>
-		</p>
-    </dl>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Flask File Upload Example</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <h2>Select a file to upload</h2>
     <p>
-		<input type="submit" value="Submit">
-	</p>
-</form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </p>
+    {% if filename %}
+        <div>
+            <img src="{{ url_for('display_image', filename=filename) }}" alt="Uploaded Image">
+        </div>
+        <h3>Treatment Recommendation:</h3>
+        <p class="treatment-container">{{ treatment }}</p>
+    {% endif %}
+    <form method="post" action="/" enctype="multipart/form-data">
+        <div class="input-file">
+            <label for="file" class="button">Choose File</label>
+            <input type="file" name="file" id="file" autocomplete="off" required>
+        </div>
+        <p>
+            <input type="submit" class="button" value="Submit">
+        </p>
+    </form>
+</body>
+</html>
