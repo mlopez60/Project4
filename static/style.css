@@ -1,3 +1,139 @@
-body{
-    background-color: darkgreen;
-}
+/* General button styling */
+.button {
+    transition-duration: 0.4s;
+    background-color: white; /* Initial background color */
+    color: black; /* Initial text color */
+    border: 2px solid #04AA6D; /* Initial border color */
+    padding: 10px 20px; /* Padding for the button */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+  }
+  
+  /* Button hover effect */
+  .button:hover {
+    background-color: #04AA6D; /* Green background on hover */
+    color: white; /* White text color on hover */
+  }
+  
+  /* Style for file input */
+  .input-file {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .input-file input[type="file"] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+  
+  .input-file .button {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: white;
+    border: 2px solid #04AA6D;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+  }
+  
+  .input-file .button:hover {
+    background-color: #04AA6D;
+    color: white;
+  }
+  
+  /* Additional styles for the form and image display */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* Ensures the form doesn't stretch too wide */
+    text-align: center;
+  }
+  
+  form div {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
+  
+  label[for="file"] {
+    padding: 10px 20px;
+    background-color: white;
+    border: 2px solid #04AA6D;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+  }
+  
+  label[for="file"]:hover {
+    background-color: #04AA6D;
+    color: white;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  ul li {
+    background: #d7f8d9;
+    color: #1c7223;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #c6f5ce;
+  }
+  
+  h3 {
+    color: #04AA6D;
+  }
+  
+  /* Centering the treatment text in the middle third of the window */
+  .treatment-container {
+    width: 33%;
+    margin: 0 auto;
+    text-align: center;
+    word-wrap: break-word;
+    color: #555;
+  }
+  
