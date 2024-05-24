@@ -23,7 +23,7 @@ from app import app
 # my_path = os.path.abspath(__file__)
 
 
-data_dir = "/Users/mlopez/Desktop/archive/New Plant Diseases Dataset(Augmented)/New Plant Diseases Dataset(Augmented)"
+data_dir = "Link to New Plant Diseases Dataset(Augmented)"
 train_dir = Path(os.path.join(data_dir, "train"))
 valid_dir = Path(os.path.join(data_dir, "valid"))
 diseases = os.listdir(train_dir)
@@ -101,6 +101,26 @@ treatments_df.insert(0, 'New_ID', range(0, 0 + len(treatments_df)))
 #     print(treatment)
 #     return output_path, treatment
 
+# def predict_image(image_path, model, original_filename):
+#     plt.switch_backend('Agg')
+#     img = tf.keras.utils.load_img(image_path, target_size=(img_height, img_width))
+#     img_array = tf.keras.utils.img_to_array(img)
+#     img_array = tf.expand_dims(img_array, 0)
+
+#     predictions = model.predict(img_array)
+#     im_class = tf.argmax(predictions[0], axis=-1)
+#     class_title = name_id_map.get(int(im_class))
+#     treatment = treatments_df.loc[treatments_df.New_ID.eq(int(im_class)), 'Treatment'].values[0]
+
+#     plt.imshow(np.squeeze(img_array.numpy().astype("uint8")))
+#     plt.title(f"Class Predicted: {class_title}")
+#     plt.axis("off")
+#     processed_filename = secure_filename(original_filename)
+#     output_path = os.path.join(app.config['PROCESSED_FOLDER'], processed_filename)
+#     plt.savefig(output_path)
+#     print(treatment)
+#     return processed_filename, treatment
+
 def predict_image(image_path, model, original_filename):
     plt.switch_backend('Agg')
     img = tf.keras.utils.load_img(image_path, target_size=(img_height, img_width))
@@ -108,15 +128,20 @@ def predict_image(image_path, model, original_filename):
     img_array = tf.expand_dims(img_array, 0)
 
     predictions = model.predict(img_array)
+    probabilities = tf.nn.softmax(predictions[0])  # Convert logits to probabilities
+    confidence = np.max(probabilities)  # Get the highest probability
+    print(f"\nPredictions:{predictions[0]}\nSum:{sum(predictions[0])}\n")
+    print(f"\nProbs:{probabilities}\nSum:{sum(probabilities)}\n")
+
     im_class = tf.argmax(predictions[0], axis=-1)
     class_title = name_id_map.get(int(im_class))
     treatment = treatments_df.loc[treatments_df.New_ID.eq(int(im_class)), 'Treatment'].values[0]
 
     plt.imshow(np.squeeze(img_array.numpy().astype("uint8")))
-    plt.title(f"Class Predicted: {class_title}")
+    plt.title(f"Class Predicted: {class_title}\nConfidence: {confidence:.2f}")
     plt.axis("off")
     processed_filename = secure_filename(original_filename)
     output_path = os.path.join(app.config['PROCESSED_FOLDER'], processed_filename)
     plt.savefig(output_path)
     print(treatment)
-    return processed_filename, treatment
+    return processed_filename, treatment, confidence
