@@ -7,6 +7,9 @@
     padding: 10px 20px; /* Padding for the button */
     font-size: 16px; /* Font size */
     cursor: pointer; /* Pointer cursor on hover */
+    display: inline-block; /* Ensure buttons display correctly */
+    text-align: center; /* Center text inside button */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
   }
   
   /* Button hover effect */
