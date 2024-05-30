@@ -14,10 +14,10 @@
 - https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset
 
 - We used a variety of libraries to achieve our goal:
--- Tensorflow: platform for machine learning
--- Keras_Tuner: utilized for our hyperparameter search to find the best model for our needs
--- PIL(Pillow): python library for image processing
--- Flask: used to display interactive disease prediction webpage
+    - Tensorflow: platform for machine learning
+    - Keras_Tuner: utilized for our hyperparameter search to find the best model for our needs
+    - PIL(Pillow): python library for image processing
+    - Flask: used to display interactive disease prediction webpage
 
 ### Our Process
 1. Import files into training & validation directories.
