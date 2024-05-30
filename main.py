@@ -1,24 +1,24 @@
 import os
-from app import app
-import urllib.request
+import logging
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+import tensorflow as tf
 from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory
 from werkzeug.utils import secure_filename
-import matplotlib.pyplot as plt 
-import numpy as np 
-import tensorflow as tf 
-import pandas as pd
-from pathlib import Path
-from test import predict_image, new_model
-import logging
 
-# Set the directories for uploads and processed files within the static directory
+from app import app
+from test import predict_image, new_model
+
+# Configuration constants
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
 PROCESSED_FOLDER = os.path.join('static', 'processed')
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
+# Flask application configuration
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['PROCESSED_FOLDER'] = PROCESSED_FOLDER
-
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
