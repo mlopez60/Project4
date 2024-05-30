@@ -25,12 +25,16 @@
 3. Instantiate the tuner.
 4. Run the hyperparameter tuner search.
 5. Using best model build (tuner.get_best_models), begin training model with training data & validation data.
+
    ![image](https://github.com/mlopez60/Project4/assets/98186160/4d1b5ba7-45eb-4f3f-9fdc-84dfb620c0db)
+
 6. Normalize pixel values (normalization layer)
 7. Build and Train Model 
 8. View Accuracy vs Loss (accuracy: 0.9710)
+    
    ![image](https://github.com/mlopez60/Project4/assets/98186160/84059329-b45e-49b2-8404-50b447f9d30e)
-9. Use Model to make Plant Disease Predictions!
+   
+9. Use Model to make Plant Disease Predictions!!!
 
 
 ### Results
