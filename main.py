@@ -23,20 +23,25 @@ app.config['PROCESSED_FOLDER'] = PROCESSED_FOLDER
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/')
-def upload_form():
+def get_plant_conditions():
     try:
         # Read CSV file
         treatments_df = pd.read_csv('plant_disease_treatments.csv')
         plant_conditions = treatments_df[['Plant Type', 'Condition']].values.tolist()
         headers = ['Plant Type', 'Condition']
-        return render_template('upload.html', headers=headers, plant_conditions=plant_conditions)
+        return headers, plant_conditions
     except Exception as e:
-        logging.error("Error loading upload form: %s", e)
-        return "Internal Server Error", 500
+        logging.error("Error loading plant conditions: %s", e)
+        return [], []
+
+@app.route('/')
+def upload_form():
+    headers, plant_conditions = get_plant_conditions()
+    return render_template('upload.html', headers=headers, plant_conditions=plant_conditions)
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
+    headers, plant_conditions = get_plant_conditions()
     try:
         if 'file' not in request.files:
             flash('No file part')
@@ -51,7 +56,10 @@ def upload_image():
             file.save(save_location)
             flash('Image successfully uploaded and displayed below')
             processed_filename, treatment, confidence = predict_image(save_location, new_model, filename)
-            return render_template('upload.html', filename=processed_filename, treatment=treatment, confidence=confidence)
+            logging.debug(f"Confidence (raw): {confidence}")
+            confidence_percentage = f"{confidence * 100:.2f}%"
+            logging.debug(f"Confidence (percentage): {confidence_percentage}")
+            return render_template('upload.html', filename=processed_filename, treatment=treatment, confidence=confidence_percentage, headers=headers, plant_conditions=plant_conditions)
         else:
             flash('Allowed image types are -> png, jpg, jpeg, gif')
             return redirect(request.url)

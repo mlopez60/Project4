@@ -75,7 +75,7 @@ def predict_image(image_path: str, model, original_filename: str):
     treatment = treatments_df.loc[treatments_df.New_ID.eq(int(im_class)), 'Treatment'].values[0]
 
     plt.imshow(np.squeeze(img_array.numpy().astype("uint8")))
-    plt.title(f"Class Predicted: {class_title}\nConfidence: {confidence:.2f}")
+    plt.title(f"Class Predicted: {class_title}\nConfidence: {confidence * 100:.2f}%")
     plt.axis("off")
     processed_filename = secure_filename(original_filename)
     output_path = os.path.join(app.config['PROCESSED_FOLDER'], processed_filename)
