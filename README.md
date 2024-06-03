@@ -32,8 +32,8 @@
 7. Build and Train Model 
 8. View Accuracy vs Loss (accuracy: 0.9710)
     
-   ![image](https://github.com/mlopez60/Project4/assets/98186160/84059329-b45e-49b2-8404-50b447f9d30e)
-   
+   ![final_graph](https://github.com/mlopez60/Project4/assets/98186160/eabb1fec-449c-4d94-8fd5-8ccfba41fccc)
+
 9. Use Model to make Plant Disease Predictions!!!
 
 
